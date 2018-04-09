@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+import fetch from 'node-fetch';
 
+console.disableYellowBox = true; // disable yellow warning boxes from showing
+
+const url = 'https://ancient-sands-37432.herokuapp.com/api/text';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,7 +20,7 @@ export default class App extends Component {
     this.setState({
       messages: [{
         _id: 1,
-        text: 'Hello developer ',
+        text: 'Hi! Talk to me',
         createdAt: new Date(Date.now()),
         user: {
           _id: 2,
@@ -33,34 +37,28 @@ export default class App extends Component {
         messages: GiftedChat.append(previousState.messages, messages)
       }
     });
-    // this.fetchMessage(messages[0].text);
-    // this.onReceive(messages[0].text);
-    this.onReceive('How can I help you?');
+    this.fetchMessage(messages[0].text);
   }
   
   fetchMessage(messages) {
     // make POST request to api
-    //192.168.1.143
-    // fetch('http://localhost:3000/api/text/', {
-    //   method: 'POST',
-    //   body: {
-    //     query: messages
-    //   },
-    //   // header: {
-    //   //   'Content-Type': 'application/x-www-form-urlencoded'
-    //   // }
-    // })
-    // .then((response) => {
-    //   this.onReceive(response.result.fulfillment.speech);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-    // this.onReceive(messages);
-
-    request.post('http://localhost:3000/api/text', {form: {query: messages}}, (res) => {
-      this.onReceive(res.result.fulfillment.speech);
+    const data = { query: messages };
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 
+        'Content-Type': 'application/json'
+      }
     })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      this.onReceive(json);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   onReceive(text) {
