@@ -6,6 +6,7 @@ import fetch from 'node-fetch';
 console.disableYellowBox = true; // disable yellow warning boxes from showing
 
 const url = 'https://ancient-sands-37432.herokuapp.com/api/text';
+const img = 'https://i.imgur.com/mlWaZmm.png';
 
 export default class App extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class App extends Component {
         user: {
           _id: 2,
           name: 'React Native',
-          avatar: 'https://scontent.fkul13-1.fna.fbcdn.net/v/t1.0-9/18767565_1552414664777784_4442061474903649127_n.jpg?oh=fa8e3877005b47c8fe2ac755dec0dca2&oe=5B068D22'
+          avatar: img
         }
       }]
     });
@@ -71,7 +72,7 @@ export default class App extends Component {
           user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://scontent.fkul13-1.fna.fbcdn.net/v/t1.0-9/18767565_1552414664777784_4442061474903649127_n.jpg?oh=fa8e3877005b47c8fe2ac755dec0dca2&oe=5B068D22'
+            avatar: img
           }
         })
       };
