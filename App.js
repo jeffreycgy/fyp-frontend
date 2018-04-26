@@ -120,13 +120,16 @@ class App extends Component {
           <Image 
             source={require('./icon.png')} 
             style={{ aspectRatio: 0.3, alignSelf: 'center', borderRadius: 100 }} resizeMode='contain'/>
-          <Text style={{ fontSize: 40, bottom: 170, color: '#ffffff'}}>
+          <Text style={{ letterSpacing: 1, fontFamily: 'sans-serif-medium', fontSize: 40, bottom: 170, color: '#ffffff'}}>
             Wooffers
+          </Text>
+          <Text style={{ letterSpacing: 1, fontFamily: 'sans-serif-thin', fontSize: 30, bottom: 160, color: '#ffffff'}}>
+            A handy buddy
           </Text>
           <Button
             onClick={this.onStartClick}
-            style={{ borderRadius: 75, backgroundColor: '#9de7f9', marginRight: '10%', marginLeft: '10%', marginBottom: 100, width: 200}}
-          >Get Started</Button>
+            style={{ borderRadius: 75, backgroundColor: '#9de7f9', marginRight: '10%', marginLeft: '10%', marginBottom: 160, width: 200}}
+            ><Text style={{ letterSpacing: 1, fontFamily: 'sans-serif-light' }}>Get Started</Text></Button>
         </View>
         </Modal>
 
