@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Modal, Image } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import fetch from 'node-fetch';
+import Button from 'antd-mobile/lib/button'
 
 console.disableYellowBox = true; // disable yellow warning boxes from showing
 
 const url = 'https://ancient-sands-37432.herokuapp.com/api/text';
 const img = 'https://i.imgur.com/mlWaZmm.png';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {message: []};
+    this.state = {
+      message: [],
+      modalVisible: true
+    };
     this.onSend = this.onSend.bind(this);
     this.onReceive = this.onReceive.bind(this);
     this.fetchMessage = this.fetchMessage.bind(this);
+    this.onStartClick = this.onStartClick.bind(this);
   }
 
   componentWillMount() {
@@ -86,8 +91,45 @@ export default class App extends Component {
     });
   }
 
+  onStartClick() {
+    this.setState({
+      modalVisible: false
+    });
+  }
+
   render() {
     return (
+      <View style={{ flex: 1 }}>
+
+        <Modal
+         animationType='none'
+         transparent={false}
+         visible={this.state.modalVisible}
+        >
+        <View style={{
+          backgroundColor: '#0eafd8',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          alignItems: 'center',
+          justifyContent: 'center'
+          
+          }}>
+          <Image 
+            source={require('./icon.png')} 
+            style={{ aspectRatio: 0.3, alignSelf: 'center', borderRadius: 100 }} resizeMode='contain'/>
+          <Text style={{ fontSize: 40, bottom: 170, color: '#ffffff'}}>
+            Wooffers
+          </Text>
+          <Button
+            onClick={this.onStartClick}
+            style={{ borderRadius: 75, backgroundColor: '#9de7f9', marginRight: '10%', marginLeft: '10%', marginBottom: 100, width: 200}}
+          >Get Started</Button>
+        </View>
+        </Modal>
+
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
@@ -98,6 +140,10 @@ export default class App extends Component {
             _id: 1
           }}
         />
+
+      </View> 
     );
   }
 }
+
+export default App;
