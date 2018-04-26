@@ -19,16 +19,23 @@ export default class App extends Component {
 
   componentWillMount() {
     this.setState({
-      messages: [{
-        _id: 1,
+      messages: [
+      {
+        _id: 2,
         text: 'Hi! Talk to me',
         createdAt: new Date(Date.now()),
         user: {
           _id: 2,
-          name: 'React Native',
+          name: 'Wooffers',
           avatar: img
         }
-      }]
+      },
+      {
+        _id: 1,
+        text: 'Welcome to Wooffers',
+        createdAt: new Date(Date.now()),
+        system:true
+      },]
     });
   }
 
@@ -71,7 +78,7 @@ export default class App extends Component {
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'React Native',
+            name: 'Wooffers',
             avatar: img
           }
         })
@@ -84,7 +91,9 @@ export default class App extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
-          alwaysShowSend={true}
+          alwaysShowSend={false}
+          loadEarlier={true}
+          minInputToolbarHeight={55}
           user={{
             _id: 1
           }}
